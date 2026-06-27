@@ -59,14 +59,14 @@ fn main() {
     let counter1 = Arc::clone(&counter);
     thread::spawn(move || {
         loop {
-            let mut c = counter1.lock().unwrap();
             io::stdout().flush().unwrap();
             let mut user_input = String::new();
             io::stdin().read_line(&mut user_input).expect("Failed to read input");
             if user_input.trim() == char_arg.to_string() {
+                let mut c = counter1.lock().unwrap();
                 *c += 1;
+                tx1.send(Message::Count(*c)).unwrap();
             }
-            tx1.send(Message::Count(*c)).unwrap();
         }
     });
 
@@ -78,7 +78,7 @@ fn main() {
                 last_amount = n;
             }
             Message::TimesUp => break,
-            _ => {}
+            
         }
     }
     println!("You have managed to press '{}' {} times.", char_arg, last_amount);
