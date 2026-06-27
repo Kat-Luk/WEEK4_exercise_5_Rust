@@ -13,6 +13,7 @@ enum Message {
 }
 fn main() {
     println!("Do you want to start or exit?");
+    print!("$ ");
     io::stdout().flush().unwrap();
     let mut choice = String::new();
     io::stdin().read_line(&mut choice).expect("Failed to read input");
@@ -78,7 +79,7 @@ fn main() {
                 last_amount = n;
             }
             Message::TimesUp => break,
-            
+
         }
     }
     println!("You have managed to press '{}' {} times.", char_arg, last_amount);
