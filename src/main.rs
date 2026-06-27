@@ -17,8 +17,8 @@ fn main() {
     let mut choice = String::new();
     io::stdin().read_line(&mut choice).expect("Failed to read input");
     match choice.trim() {
-        "$ start" => {},
-        "$ exit" => std::process::exit(0),
+        "start" => {},
+        "exit" => std::process::exit(0),
         _ => println!("Unexpected command"),
     }
     let args : Vec<String> = env::args().collect();
