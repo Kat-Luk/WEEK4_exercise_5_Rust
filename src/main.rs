@@ -20,7 +20,7 @@ fn main() {
     match choice.trim() {
         "start" => {},
         "exit" => {
-            println!("$ Goodbye then.");
+            println!("Goodbye then.");
             std::process::exit(0);
         }
         _ => println!("Unexpected command"),
