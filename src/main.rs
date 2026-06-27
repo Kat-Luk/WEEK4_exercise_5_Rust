@@ -28,13 +28,8 @@ fn main() {
         println!("cargo run <letter> <integer>");
         return;
     }
-    let char_arg: char = match args[1].parse() {
-        Ok(n) => n,
-        Err(_) => {
-            println!("Invalid char argument: {}", args[1]);
-            return;
-        }
-    };
+    let string_arg = args[1].clone();
+    let string_arg_thread = string_arg.clone();
     let int_arg:  u64 = match args[2].parse() {
         Ok(n) => n,
         Err(_) => {
@@ -63,7 +58,7 @@ fn main() {
             io::stdout().flush().unwrap();
             let mut user_input = String::new();
             io::stdin().read_line(&mut user_input).expect("Failed to read input");
-            if user_input.trim() == char_arg.to_string() {
+            if user_input.trim() == string_arg_thread {
                 let mut c = counter1.lock().unwrap();
                 *c += 1;
                 tx1.send(Message::Count(*c)).unwrap();
@@ -82,5 +77,5 @@ fn main() {
 
         }
     }
-    println!("You have managed to press '{}' {} times.", char_arg, last_amount);
+    println!("You have managed to press '{}' {} times.", string_arg, last_amount);
 }
